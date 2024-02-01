@@ -5,8 +5,8 @@
 
 
 /**
- * binary_tree_insert_left - Stores recursively each level in an array of strings
- *
+ * binary_tree_insert_left -inserts a new node to the left
+ * of an already available node
  * @parent: Pointer to the parent node
  * @value: value to add to the newly created node
  *
@@ -14,14 +14,21 @@
  */
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
-	binary_tree_t *newNode = malloc(sizeof(binary_tree_t));
+	binary_tree_t *newNode;
 
-	if (newNode == NULL || parent == NULL)
+	if (parent == NULL)
+		return (NULL);
+	newNode = malloc(sizeof(binary_tree_t));
+	if (newNode == NULL)
 		return (NULL);
 	newNode->parent = parent;
 	newNode->n = value;
-    parent->left = newNode;
 	newNode->left = NULL;
 	newNode->right = NULL;
+	if (parent->left)
+	{
+		newNode->left = parent->left;
+	}
+	parent->left = newNode;
 	return (newNode);
 }
