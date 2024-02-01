@@ -14,10 +14,14 @@
  */
 size_t binary_tree_depth_wrapper(const binary_tree_t *tree, int count)
 {
-	if (tree->parent == NULL)
-	{			
+	if (tree == NULL)
+    {
+        return (0);
+    }
+    else if (tree->parent == NULL)
+    {
         return (count);
-	}
+    }
 	return (binary_tree_depth_wrapper(tree->parent, count + 1));
 }
 

@@ -9,9 +9,10 @@
  */
 int main(void)
 {
-    binary_tree_t *root;
+    binary_tree_t *root = NULL;
     size_t depth;
-
+    depth = binary_tree_depth(root);
+    printf("Depth of %ld: \n", depth);
     root = binary_tree_node(NULL, 98);
     root->left = binary_tree_node(root, 12);
     root->right = binary_tree_node(root, 402);
