@@ -25,9 +25,26 @@ int max(int x, int y)
  *
  * Return: None
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+size_t binary_tree_height_wrapper(const binary_tree_t *tree, int count)
 {
 	if (tree == NULL)
-		return (-1);
-	return (1 + max(binary_tree_height(tree->left), binary_tree_height(tree->right)));
+	{
+		if (count == 0)
+			return (0);
+		else
+			return (-1);
+	}
+	return (1 + max(binary_tree_height_wrapper(tree->left, 1), binary_tree_height_wrapper(tree->right, 1)));
+}
+
+
+/**
+ * binary_tree_height - checks if the node is a root
+ * @tree: node which is the root initially
+ *
+ * Return: None
+ */
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	return (binary_tree_height_wrapper(tree, 0));
 }
