@@ -3,7 +3,6 @@
 #include <string.h>
 #include "binary_trees.h"
 
-
 /**
  * max - get maximum of two numbers
  * @x: first number
@@ -35,7 +34,6 @@ size_t binary_tree_height_wrapper(const binary_tree_t *tree)
 				binary_tree_height_wrapper(tree->right)));
 }
 
-
 /**
  * binary_tree_is_perfect - checks if the node is a root
  * @tree: node which is the root initially
@@ -44,15 +42,23 @@ size_t binary_tree_height_wrapper(const binary_tree_t *tree)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	size_t l, r;
-	int diff;
-
 	if (tree == NULL)
 	{
 		return (0);
 	}
-	l = binary_tree_height_wrapper(tree->left);
-	r = binary_tree_height_wrapper(tree->right);
-	diff = l == r;
-	return (diff);
+	else if (!((tree->left == NULL && tree->right == NULL) ||
+		(tree->left != NULL && tree->right != NULL)))
+	{
+		return (0);
+	}
+	if (tree->left != NULL)
+		/* this means that the right is also null as we checked above*/
+		return ((binary_tree_is_perfect(tree->left) &&
+				binary_tree_is_perfect(tree->right)) &&
+				(binary_tree_height_wrapper(tree->left) ==
+				binary_tree_height_wrapper(tree->right)));
+	else
+	{
+		return (1);
+	}
 }
